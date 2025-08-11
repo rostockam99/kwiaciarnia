@@ -61,7 +61,7 @@ export default function KwiaciarniaPage() {
     { src: "/images/dekoracje.png", alt: "Dekoracja kościoła" },
     { src: "/images/balloons-6652983_1280.webp", alt: "Dekoracja balonowa" },
     { src: "/images/dekoracje ślubne-min.jpg", alt: "Dekoracja sali weselnej" },
-    { src: "/images/21bf396f526af0efbe2199ac0d10358c.jpg, alt: "Bukiet panny młodej" },
+    { src: "/images/21bf396f526af0efbe2199ac0d10358c.jpg", alt: "Bukiet panny młodej" },
     { src: "/images/balonhel.png", alt: "Balony z helem" },
   ]
 
