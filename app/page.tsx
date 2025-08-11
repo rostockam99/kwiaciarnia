@@ -57,12 +57,12 @@ export default function KwiaciarniaPage() {
   ]
 
   const galleryImages = [
-    { src: "/images/pngtree-rose-bouquet-png-image_20929044.png", alt: "Bukiet ślubny z różami" },
-    { src: "/images/dekoracje.png", alt: "Dekoracja kościoła" },
-    { src: "/images/balloons-6652983_1280.webp", alt: "Dekoracja balonowa" },
+    { src: "/images/dekoracje ślubne-min.jpg", alt: "Bukiet ślubny z różami" },
+    { src: "/images/dekoracje ślubne-min.jpg", alt: "Dekoracja kościoła" },
+    { src: "/images/dekoracje ślubne-min.jpg", alt: "Dekoracja balonowa" },
     { src: "/images/dekoracje ślubne-min.jpg", alt: "Dekoracja sali weselnej" },
-    { src: "/images/21bf396f526af0efbe2199ac0d10358c.jpg", alt: "Bukiet panny młodej" },
-    { src: "/images/balonhel.png", alt: "Balony z helem" },
+    { src: "/images/dekoracje ślubne-min.jpg", alt: "Bukiet panny młodej" },
+    { src: "/images/dekoracje ślubne-min.jpg", alt: "Balony z helem" },
   ]
 
   return (
