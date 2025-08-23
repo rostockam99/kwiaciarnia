@@ -5,8 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import {
   Heart,
@@ -15,21 +13,23 @@ import {
   Mail,
   Flower2,
   Church,
-  Camera,
   Car,
-  Cross,
   Gift,
-  ArrowLeft,
   ChevronLeft,
   ChevronRight,
-  BombIcon as Balloon,
+  BellIcon as Balloon,
   Facebook,
+  X,
+  Star,
+  Clock,
+  Award,
 } from "lucide-react"
 
 export default function KwiaciarniaPage() {
   const [isVisible, setIsVisible] = useState({})
   const [selectedOffer, setSelectedOffer] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -50,6 +50,27 @@ export default function KwiaciarniaPage() {
     elements.forEach((el) => observer.observe(el))
 
     return () => observer.disconnect()
+  }, [])
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isGalleryOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isGalleryOpen])
+
+  // Prevent horizontal scroll on mobile
+  useEffect(() => {
+    document.body.style.overflowX = "hidden"
+    return () => {
+      document.body.style.overflowX = "auto"
+    }
   }, [])
 
   const offers = [
@@ -94,28 +115,12 @@ export default function KwiaciarniaPage() {
       imageCount: 25,
     },
     {
-      id: "oprawa-pogrzebowa",
-      icon: <Cross className="w-8 h-8 text-rose-500" />,
-      title: "Oprawa pogrzebowa",
-      description: "Godne i eleganckie kompozycje pogrzebowe",
-      color: "from-gray-100 to-slate-200",
-      imageCount: 30,
-    },
-    {
       id: "oprawa-komunijna",
       icon: <Church className="w-8 h-8 text-rose-500" />,
       title: "Oprawa komunijna",
       description: "Dekoracje na Pierwszą Komunię Świętą",
       color: "from-blue-100 to-sky-200",
       imageCount: 25,
-    },
-    {
-      id: "scianki-dekoracyjne",
-      icon: <Flower2 className="w-8 h-8 text-rose-500" />,
-      title: "Ścianki dekoracyjne",
-      description: "Piękne ścianki kwiatowe na wesela i inne uroczystości",
-      color: "from-emerald-100 to-green-200",
-      imageCount: 30,
     },
     {
       id: "dekoracja-kosciola",
@@ -141,13 +146,69 @@ export default function KwiaciarniaPage() {
       color: "from-teal-100 to-cyan-200",
       imageCount: 30,
     },
+  ]
+
+  const awards = [
+    { year: "2025", type: "GOLD", image: "/images/awards/2025-gold.png" },
+    { year: "2025", type: "LAUREAT KONKURSU", image: "/images/awards/2025-ambassador.png" },
+    { year: "2024", type: "GOLD", image: "/images/awards/2024-gold.png" },
+    { year: "2024", type: "LAUREAT KONKURSU", image: "/images/awards/2024-ambassador.png" },
+    { year: "2023", type: "SILVER", image: "/images/awards/2023-silver.png" },
+    { year: "2023", type: "LAUREAT KONKURSU", image: "/images/awards/2023-ambassador.png" },
+    { year: "2022", type: "BRONZE", image: "/images/awards/2022-bronze.png" },
+    { year: "2022", type: "LAUREAT KONKURSU", image: "/images/awards/2022-ambassador.png" },
+    { year: "2021", type: "GOLD", image: "/images/awards/2021-gold.png" },
+    { year: "2021", type: "LAUREAT KONKURSU", image: "/images/awards/2021-ambassador.png" },
+  ]
+
+  const reviews = [
     {
-      id: "upominki",
-      icon: <Gift className="w-8 h-8 text-rose-500" />,
-      title: "Upominki",
-      description: "Kwiatowe upominki i dodatki na każdą okazję",
-      color: "from-amber-100 to-yellow-200",
-      imageCount: 20,
+      id: 1,
+      name: "Anna Kowalska",
+      rating: 5,
+      text: "Przepiękny bukiet ślubny! Pani Beata doskonale zrozumiała moją wizję i stworzyła coś jeszcze piękniejszego niż sobie wyobrażałam. Polecam z całego serca!",
+      date: "2024-01-15",
+      service: "Bukiet ślubny",
+    },
+    {
+      id: 2,
+      name: "Marcin Nowak",
+      rating: 5,
+      text: "Fantastyczne dekoracje sali weselnej. Goście byli zachwyceni! Profesjonalna obsługa i piękne kompozycje kwiatowe. Dziękujemy!",
+      date: "2024-01-10",
+      service: "Dekoracje weselne",
+    },
+    {
+      id: 3,
+      name: "Katarzyna Wiśniewska",
+      rating: 5,
+      text: "Balony z helem na urodziny córki były hitem! Dzieci były zachwycone, a jakość wykonania na najwyższym poziomie.",
+      date: "2024-01-05",
+      service: "Balony z helem",
+    },
+    {
+      id: 4,
+      name: "Tomasz Lewandowski",
+      rating: 5,
+      text: "Dekoracja kościoła na ślub była przepiękna. Pani Beata ma niesamowite wyczucie estetyki. Bardzo profesjonalne podejście.",
+      date: "2023-12-28",
+      service: "Dekoracja kościoła",
+    },
+    {
+      id: 5,
+      name: "Robert Kowalczyk",
+      rating: 5,
+      text: "Oprawa komunijna dla mojego syna była przepiękna! Dekoracje kościoła i bukiety były wykonane z największą starannością. Pani Beata ma ogromne doświadczenie i wyczucie.",
+      date: "2023-12-10",
+      service: "Oprawa komunijna",
+    },
+    {
+      id: 6,
+      name: "Robert Kowalczyk",
+      rating: 5,
+      text: "Oprawa komunijna dla mojego syna była przepiękna! Dekoracje kościoła i bukiety były wykonane z największą starannością. Pani Beata ma ogromne doświadczenie i wyczucie.",
+      date: "2023-12-10",
+      service: "Oprawa komunijna",
     },
   ]
 
@@ -167,11 +228,15 @@ export default function KwiaciarniaPage() {
   const handleOfferClick = (offer) => {
     setSelectedOffer(offer)
     setCurrentImageIndex(0)
+    setIsGalleryOpen(true)
   }
 
-  const handleBackToOffers = () => {
-    setSelectedOffer(null)
-    setCurrentImageIndex(0)
+  const handleCloseGallery = () => {
+    setIsGalleryOpen(false)
+    setTimeout(() => {
+      setSelectedOffer(null)
+      setCurrentImageIndex(0)
+    }, 300)
   }
 
   const nextImage = () => {
@@ -185,6 +250,23 @@ export default function KwiaciarniaPage() {
       setCurrentImageIndex((prev) => (prev === 0 ? selectedOffer.imageCount - 1 : prev - 1))
     }
   }
+
+  const handleKeyDown = (e) => {
+    if (!isGalleryOpen) return
+
+    if (e.key === "Escape") {
+      handleCloseGallery()
+    } else if (e.key === "ArrowLeft") {
+      prevImage()
+    } else if (e.key === "ArrowRight") {
+      nextImage()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [isGalleryOpen, selectedOffer])
 
   const galleryImages = selectedOffer ? generateGalleryImages(selectedOffer) : []
 
@@ -208,8 +290,8 @@ export default function KwiaciarniaPage() {
               <Link href="#services" className="text-gray-700 hover:text-rose-500 transition-colors">
                 Oferta
               </Link>
-              <Link href="#gallery" className="text-gray-700 hover:text-rose-500 transition-colors">
-                Galeria
+              <Link href="#reviews" className="text-gray-700 hover:text-rose-500 transition-colors">
+                Opinie
               </Link>
               <Link href="#contact" className="text-gray-700 hover:text-rose-500 transition-colors">
                 Kontakt
@@ -309,13 +391,14 @@ export default function KwiaciarniaPage() {
                   <span className="text-lg">ul. Nowogrodzka 250, 18-400 Łomża</span>
                 </div>
               </div>
-              <div className="relative">
+              <div className="relative w-full max-w-md mx-auto">
                 <Image
                   src="/images/florist-working.png"
                   alt="Kwiaciarka przy pracy"
                   width={500}
                   height={400}
-                  className="rounded-lg shadow-xl object-cover"
+                  className="w-full h-auto rounded-lg shadow-xl object-cover"
+                  priority
                 />
               </div>
             </div>
@@ -324,143 +407,163 @@ export default function KwiaciarniaPage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-gradient-to-b from-rose-50 to-white">
+      <section id="services" className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          {!selectedOffer ? (
-            <>
+          <div
+            id="services-title"
+            data-animate
+            className={`text-center mb-16 transition-all duration-1000 ${
+              isVisible["services-title"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-playfair">Nasza oferta</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Oferujemy kompleksowe usługi florystyczne na każdą okazję
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {offers.map((offer, index) => (
               <div
-                id="services-title"
+                key={offer.id}
+                id={`service-${index}`}
                 data-animate
-                className={`text-center mb-16 transition-all duration-1000 ${
-                  isVisible["services-title"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                className={`transition-all duration-1000 delay-${index * 100} ${
+                  isVisible[`service-${index}`] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
               >
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-playfair">Nasza oferta</h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  Oferujemy kompleksowe usługi florystyczne na każdą okazję
-                </p>
+                <Card
+                  className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm cursor-pointer group"
+                  onClick={() => handleOfferClick(offer)}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="mb-4 flex justify-center">
+                      <div
+                        className={`p-4 bg-gradient-to-br ${offer.color} rounded-full group-hover:scale-110 transition-transform duration-300`}
+                      >
+                        {offer.icon}
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-3 font-playfair group-hover:text-rose-600 transition-colors">
+                      {offer.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed text-sm mb-4">{offer.description}</p>
+                    <Badge variant="secondary" className="bg-rose-100 text-rose-700">
+                      {offer.imageCount} zdjęć
+                    </Badge>
+                  </CardContent>
+                </Card>
               </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {offers.map((offer, index) => (
-                  <div
-                    key={offer.id}
-                    id={`service-${index}`}
-                    data-animate
-                    className={`transition-all duration-1000 delay-${index * 100} ${
-                      isVisible[`service-${index}`] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                    }`}
-                  >
-                    <Card
-                      className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm cursor-pointer group"
-                      onClick={() => handleOfferClick(offer)}
-                    >
-                      <CardContent className="p-6 text-center">
-                        <div className="mb-4 flex justify-center">
-                          <div
-                            className={`p-4 bg-gradient-to-br ${offer.color} rounded-full group-hover:scale-110 transition-transform duration-300`}
-                          >
-                            {offer.icon}
-                          </div>
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-800 mb-3 font-playfair group-hover:text-rose-600 transition-colors">
-                          {offer.title}
-                        </h3>
-                        <p className="text-gray-600 leading-relaxed text-sm mb-4">{offer.description}</p>
-                        <Badge variant="secondary" className="bg-rose-100 text-rose-700">
-                          {offer.imageCount} zdjęć
-                        </Badge>
-                      </CardContent>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            /* Gallery View */
-            <div className="max-w-7xl mx-auto">
-              <div className="mb-8">
-                <Button variant="outline" onClick={handleBackToOffers} className="mb-4 hover:bg-rose-50 bg-transparent">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Powrót do oferty
-                </Button>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 font-playfair">
-                  {selectedOffer.title}
-                </h2>
-                <p className="text-xl text-gray-600 mb-6">{selectedOffer.description}</p>
-                <Badge variant="secondary" className="bg-rose-100 text-rose-700 text-lg px-4 py-2">
-                  {selectedOffer.imageCount} realizacji
-                </Badge>
-              </div>
-
-              {/* Main Image Display */}
-              <div className="relative mb-8">
-                <div className="relative h-96 md:h-[600px] bg-gray-100 rounded-lg overflow-hidden shadow-xl">
-                  <Image
-                    src={galleryImages[currentImageIndex]?.src || "/placeholder.svg"}
-                    alt={galleryImages[currentImageIndex]?.alt || "Galeria"}
-                    fill
-                    className="object-cover"
-                  />
-
-                  {/* Navigation arrows */}
-                  <button
-                    onClick={prevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-
-                  {/* Image counter */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full">
-                    {currentImageIndex + 1} / {selectedOffer.imageCount}
-                  </div>
-                </div>
-              </div>
-
-              {/* Thumbnail Grid */}
-              <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2 mb-8">
-                {galleryImages.slice(0, 40).map((image, index) => (
-                  <div
-                    key={image.id}
-                    className={`relative aspect-square cursor-pointer rounded-lg overflow-hidden transition-all duration-300 ${
-                      index === currentImageIndex ? "ring-4 ring-rose-500 scale-105" : "hover:scale-105 hover:shadow-lg"
-                    }`}
-                    onClick={() => setCurrentImageIndex(index)}
-                  >
-                    <Image src={image.src || "/placeholder.svg"} alt={image.alt} fill className="object-cover" />
-                  </div>
-                ))}
-                {selectedOffer.imageCount > 40 && (
-                  <div className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-sm">
-                    +{selectedOffer.imageCount - 40} więcej
-                  </div>
-                )}
-              </div>
-
-              {/* Load More Button for large galleries */}
-              {selectedOffer.imageCount > 40 && (
-                <div className="text-center">
-                  <Button variant="outline" className="hover:bg-rose-50 bg-transparent">
-                    Pokaż wszystkie zdjęcia ({selectedOffer.imageCount})
-                  </Button>
-                </div>
-              )}
-            </div>
-          )}
+            ))}
+          </div>
         </div>
       </section>
 
-     
+      {/* Reviews Section */}
+      <section id="reviews" className="py-20 bg-gradient-to-b from-rose-50 to-white">
+        <div className="container mx-auto px-4">
+          <div
+            id="reviews-title"
+            data-animate
+            className={`text-center mb-16 transition-all duration-1000 ${
+              isVisible["reviews-title"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-playfair">Opinie klientów</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Zobacz, co mówią o nas nasi zadowoleni klienci</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {reviews.map((review, index) => (
+              <div
+                key={review.id}
+                id={`review-${index}`}
+                data-animate
+                className={`transition-all duration-1000 delay-${index * 100} ${
+                  isVisible[`review-${index}`] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+              >
+                <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-white/90 backdrop-blur-sm">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="flex text-yellow-400">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 fill-current" />
+                        ))}
+                      </div>
+                      <Badge variant="secondary" className="ml-auto bg-rose-100 text-rose-700 text-xs">
+                        {review.service}
+                      </Badge>
+                    </div>
+                    <p className="text-gray-600 mb-4 leading-relaxed italic">"{review.text}"</p>
+                    <div className="flex items-center justify-between text-sm text-gray-500">
+                      <span className="font-medium text-gray-800">{review.name}</span>
+                      <span>{new Date(review.date).toLocaleDateString("pl-PL")}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Awards Section */}
+      <section className="py-20 bg-gradient-to-b from-white to-rose-50">
+        <div className="container mx-auto px-4">
+          <div
+            id="awards-title"
+            data-animate
+            className={`text-center mb-16 transition-all duration-1000 ${
+              isVisible["awards-title"] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-playfair">Nagrody i wyróżnienia</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Prestiżowe nagrody branżowe potwierdzające najwyższą jakość naszych usług
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            {awards.map((award, index) => (
+              <div
+                key={`${award.year}-${award.type}`}
+                id={`award-${index}`}
+                data-animate
+                className={`transition-all duration-1000 delay-${index * 100} ${
+                  isVisible[`award-${index}`] ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
+              >
+                <div className="text-center group">
+                  <div className="relative mb-4 hover:scale-110 transition-transform duration-300">
+                    <Image
+                      src={award.image || "/placeholder.svg"}
+                      alt={`Nagroda ${award.year} - ${award.type}`}
+                      width={100}
+                      height={100}
+                      className="mx-auto drop-shadow-lg"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-bold text-gray-800 text-base">{award.year}</p>
+                    <p className="text-xs text-gray-600 font-medium">{award.type}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-100 to-amber-100 px-6 py-3 rounded-full">
+              <Award className="w-6 h-6 text-amber-600" />
+              <span className="text-amber-800 font-semibold">Wielokrotnie nagradzana kwiaciarnia</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gradient-to-b from-rose-50 to-rose-100">
+      <section id="contact" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div
             id="contact-title"
@@ -477,115 +580,99 @@ export default function KwiaciarniaPage() {
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <div
-              id="contact-form"
-              data-animate
-              className={`transition-all duration-1000 ${
-                isVisible["contact-form"] ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-              }`}
-            >
-              <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-6 font-playfair">Napisz do nas</h3>
-                  <form className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Imię i nazwisko</label>
-                        <Input
-                          type="text"
-                          className="w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500"
-                          placeholder="Twoje imię i nazwisko"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Telefon</label>
-                        <Input
-                          type="tel"
-                          className="w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500"
-                          placeholder="Numer telefonu"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                      <Input
-                        type="email"
-                        className="w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500"
-                        placeholder="Twój adres email"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Wiadomość</label>
-                      <Textarea
-                        rows={5}
-                        className="w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500"
-                        placeholder="Opisz swoje potrzeby..."
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                      Wyślij wiadomość
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div
               id="contact-info"
               data-animate
-              className={`space-y-8 transition-all duration-1000 ${
-                isVisible["contact-info"] ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+              className={`transition-all duration-1000 ${
+                isVisible["contact-info"] ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
               }`}
             >
-              <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm">
+              <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm h-full">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold text-gray-800 mb-6 font-playfair">Dane kontaktowe</h3>
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     <div className="flex items-center space-x-4">
                       <div className="p-3 bg-rose-100 rounded-full">
-                        <MapPin className="w-5 h-5 text-rose-500" />
+                        <MapPin className="w-6 h-6 text-rose-500" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-800">Adres</p>
-                        <p className="text-gray-600">ul. Nowogrodzka 250, 18-400 Łomża</p>
+                        <p className="font-medium text-gray-800 text-lg">Adres</p>
+                        <p className="text-gray-600">ul. Nowogrodzka 250</p>
+                        <p className="text-gray-600">18-400 Łomża</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
                       <div className="p-3 bg-rose-100 rounded-full">
-                        <Phone className="w-5 h-5 text-rose-500" />
+                        <Phone className="w-6 h-6 text-rose-500" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-800">Telefon</p>
-                        <p className="text-gray-600">+48 510 403 613</p>
+                        <p className="font-medium text-gray-800 text-lg">Telefon</p>
+                        <a href="tel:+48510403613" className="text-rose-600 hover:text-rose-700 text-lg font-medium">
+                          +48 510 403 613
+                        </a>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
                       <div className="p-3 bg-rose-100 rounded-full">
-                        <Mail className="w-5 h-5 text-rose-500" />
+                        <Mail className="w-6 h-6 text-rose-500" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-800">Email</p>
-                        <p className="text-gray-600">kontakt@kwiaciarnia-beata.pl</p>
+                        <p className="font-medium text-gray-800 text-lg">Email</p>
+                        <a href="mailto:kontakt@kwiaciarnia-beata.pl" className="text-rose-600 hover:text-rose-700">
+                          kontakt@kwiaciarnia-beata.pl
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="p-3 bg-rose-100 rounded-full">
+                        <Clock className="w-6 h-6 text-rose-500" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-800 text-lg">Godziny otwarcia</p>
+                        <p className="text-gray-600">Poniedziałek - Piątek: 8:00 - 18:00</p>
+                        <p className="text-gray-600">Sobota: 8:00 - 15:00</p>
+                        <p className="text-gray-600">Niedziela: 9:00 - 13:00</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="p-3 bg-blue-100 rounded-full">
+                        <Facebook className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-800 text-lg">Facebook</p>
+                        <a
+                          href="https://www.facebook.com/p/Kwiaciarnia-Sztachańska-Beata-ul-Nowogrodzka-250-18-400-Łomża-100067674105803"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-700"
+                        >
+                          Kwiaciarnia Sztachańska Beata
+                        </a>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
+            </div>
 
-              <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm">
-                <CardContent className="p-0">
-                  <div className="h-64 bg-gray-200 rounded-lg overflow-hidden">
+            <div
+              id="contact-map"
+              data-animate
+              className={`transition-all duration-1000 ${
+                isVisible["contact-map"] ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+              }`}
+            >
+              <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm h-full">
+                <CardContent className="p-0 h-full">
+                  <div className="h-full min-h-[500px] bg-gray-200 rounded-lg overflow-hidden">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2319.8!2d22.0!3d53.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDA2JzAwLjAiTiAyMsKwMDAnMDAuMCJF!5e0!3m2!1spl!2spl!4v1234567890"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2319.8!2d22.0!3d53.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffc0c9b5b5b5b%3A0x5b5b5b5b5b5b5b5b!2sNowogrodzka%20250%2C%2018-400%20%C5%81om%C5%BCa!5e0!3m2!1spl!2spl!4v1234567890"
                       width="100%"
                       height="100%"
-                      style={{ border: 0 }}
+                      style={{ border: 0, minHeight: "500px" }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Lokalizacja kwiaciarni"
+                      title="Lokalizacja kwiaciarni - ul. Nowogrodzka 250, 18-400 Łomża"
                     ></iframe>
                   </div>
                 </CardContent>
@@ -646,6 +733,92 @@ export default function KwiaciarniaPage() {
           </div>
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      {isGalleryOpen && selectedOffer && (
+        <div className="fixed inset-0 bg-black/90 z-[60] flex flex-col">
+          <div
+            className={`relative w-full h-full flex flex-col transition-all duration-300 ${isGalleryOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 text-white bg-black/50 backdrop-blur-sm">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold font-playfair">{selectedOffer.title}</h2>
+                <p className="text-white/80">{selectedOffer.description}</p>
+              </div>
+              <button
+                onClick={handleCloseGallery}
+                className="p-2 hover:bg-white/10 rounded-full transition-colors duration-300"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Main Image Container */}
+            <div className="flex-1 flex items-center justify-center relative p-4">
+              <div className="relative max-w-full max-h-full flex items-center justify-center">
+                <Image
+                  src={galleryImages[currentImageIndex]?.src || "/placeholder.svg"}
+                  alt={galleryImages[currentImageIndex]?.alt || "Galeria"}
+                  width={1200}
+                  height={800}
+                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  priority
+                />
+
+                {/* Navigation arrows */}
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Footer with counter and thumbnail grid */}
+            <div className="bg-black/50 backdrop-blur-sm p-4 text-white">
+              {/* Image counter */}
+              <div className="text-center mb-4">
+                <span className="bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm">
+                  {currentImageIndex + 1} / {selectedOffer.imageCount}
+                </span>
+              </div>
+
+              {/* Thumbnail grid - scrollable */}
+              <div className="relative">
+                <div className="overflow-x-auto overflow-y-hidden">
+                  <div className="flex space-x-2 pb-2" style={{ width: `${galleryImages.length * 80}px` }}>
+                    {galleryImages.map((image, index) => (
+                      <div
+                        key={image.id}
+                        className={`relative w-16 h-16 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden transition-all duration-300 ${
+                          index === currentImageIndex
+                            ? "ring-2 ring-rose-500 scale-110"
+                            : "hover:scale-105 opacity-70 hover:opacity-100"
+                        }`}
+                        onClick={() => setCurrentImageIndex(index)}
+                      >
+                        <Image src={image.src || "/placeholder.svg"} alt={image.alt} fill className="object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Scroll indicators */}
+                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/50 to-transparent pointer-events-none"></div>
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/50 to-transparent pointer-events-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

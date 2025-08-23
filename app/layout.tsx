@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description:
     "Profesjonalne dekoracje ślubne, bukiety ślubne, dekoracje balonowe i pompowanie balonów helem w Łomży. Kwiaciarnia Beata Sztachańska - ul. Nowogrodzka 250.",
   keywords: "kwiaciarnia, Łomża, bukiety ślubne, dekoracje ślubne, balony helem, dekoracje balonowe",
-    generator: 'v0.dev'
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
