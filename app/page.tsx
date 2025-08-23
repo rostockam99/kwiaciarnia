@@ -777,7 +777,7 @@ export default function KwiaciarniaPage() {
               {/* Thumbnail grid - scrollable */}
               <div className="relative">
                 <div className="overflow-x-auto overflow-y-hidden">
-                  <div className="flex space-x-2 pb-2" style={{ width: `${galleryImages.length * 80}px` }}>
+                  <div className="flex space-x-2 pb-2 min-w-full">
                     {galleryImages.map((image, index) => (
                       <div
                         key={image.id}
