@@ -380,7 +380,7 @@ export default function KwiaciarniaPage() {
                   alt="Kwiaciarka przy pracy"
                   width={500}
                   height={400}
-                  className="w-full h-auto rounded-lg shadow-xl object-cover"
+                  className="w-full h-auto object-cover"
                   priority
                 />
               </div>
