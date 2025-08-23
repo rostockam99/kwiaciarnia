@@ -123,7 +123,7 @@ export default function KwiaciarniaPage() {
       imageCount: 12,
     },
     {
-      id: "dekoracja-kosciola",
+      id: "dekoracje-kosciola",
       icon: <Church className="w-8 h-8 text-rose-500" />,
       title: "Dekoracja kościoła",
       description: "Profesjonalne dekoracje kościelne na różne okazje",
