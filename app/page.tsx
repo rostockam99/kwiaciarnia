@@ -325,24 +325,7 @@ export default function KwiaciarniaPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
           <div className="absolute inset-0 bg-rose-900/10"></div>
 
-          <div className="absolute inset-0 overflow-hidden">
-            <div
-              className="absolute top-1/4 left-1/4 w-4 h-4 bg-white/20 rounded-full animate-bounce"
-              style={{ animationDelay: "0s", animationDuration: "3s" }}
-            ></div>
-            <div
-              className="absolute top-1/3 right-1/3 w-3 h-3 bg-rose-200/30 rounded-full animate-bounce"
-              style={{ animationDelay: "1s", animationDuration: "4s" }}
-            ></div>
-            <div
-              className="absolute bottom-1/4 left-1/3 w-5 h-5 bg-white/15 rounded-full animate-bounce"
-              style={{ animationDelay: "2s", animationDuration: "5s" }}
-            ></div>
-            <div
-              className="absolute top-1/2 right-1/4 w-2 h-2 bg-rose-200/25 rounded-full animate-bounce"
-              style={{ animationDelay: "0.5s", animationDuration: "3.5s" }}
-            ></div>
-          </div>
+          
         </div>
 
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
