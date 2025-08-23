@@ -80,7 +80,7 @@ export default function KwiaciarniaPage() {
       title: "Bukiety ślubne",
       description: "Wyjątkowe bukiety ślubne dopasowane do Twojego stylu",
       color: "from-pink-100 to-rose-200",
-      imageCount: 45,
+      imageCount: 10,
     },
     {
       id: "bukiety-okolicznosciowe",
@@ -88,7 +88,7 @@ export default function KwiaciarniaPage() {
       title: "Bukiety okolicznościowe",
       description: "Piękne bukiety na każdą okazję - urodziny, imieniny, rocznice",
       color: "from-rose-100 to-pink-200",
-      imageCount: 35,
+      imageCount: 30,
     },
     {
       id: "balony-z-helem",
@@ -96,15 +96,15 @@ export default function KwiaciarniaPage() {
       title: "Balony z helem",
       description: "Kolorowe balony z helem na każdą uroczystość",
       color: "from-sky-100 to-blue-200",
-      imageCount: 40,
+      imageCount: 30,
     },
     {
       id: "dekoracje-sal-weselnych",
       icon: <Church className="w-8 h-8 text-rose-500" />,
-      title: "Dekoracje sal weselnych",
-      description: "Profesjonalne dekoracje sal weselnych żywymi kwiatami",
+      title: "Dekoracje sal",
+      description: "Profesjonalne dekoracje sal weselnych i komunijnych żywymi kwiatami",
       color: "from-rose-200 to-pink-100",
-      imageCount: 60,
+      imageCount: 55,
     },
     {
       id: "auta-do-slubu",
@@ -112,7 +112,7 @@ export default function KwiaciarniaPage() {
       title: "Auta do ślubu",
       description: "Eleganckie dekoracje samochodów ślubnych",
       color: "from-pink-200 to-rose-100",
-      imageCount: 25,
+      imageCount: 15,
     },
     {
       id: "oprawa-komunijna",
@@ -120,7 +120,7 @@ export default function KwiaciarniaPage() {
       title: "Oprawa komunijna",
       description: "Dekoracje na Pierwszą Komunię Świętą",
       color: "from-blue-100 to-sky-200",
-      imageCount: 25,
+      imageCount: 12,
     },
     {
       id: "dekoracja-kosciola",
@@ -128,7 +128,7 @@ export default function KwiaciarniaPage() {
       title: "Dekoracja kościoła",
       description: "Profesjonalne dekoracje kościelne na różne okazje",
       color: "from-purple-100 to-violet-200",
-      imageCount: 40,
+      imageCount: 65,
     },
     {
       id: "florystyka-pogrzebowa",
@@ -136,7 +136,7 @@ export default function KwiaciarniaPage() {
       title: "Florystyka pogrzebowa",
       description: "Wieńce, wiązanki i kompozycje pogrzebowe",
       color: "from-slate-100 to-gray-200",
-      imageCount: 35,
+      imageCount: 48,
     },
     {
       id: "flowerboxy",
@@ -144,7 +144,7 @@ export default function KwiaciarniaPage() {
       title: "Flowerboxy",
       description: "Nowoczesne kompozycje kwiatowe w eleganckich pudełkach",
       color: "from-teal-100 to-cyan-200",
-      imageCount: 30,
+      imageCount: 11,
     },
   ]
 
@@ -690,8 +690,8 @@ export default function KwiaciarniaPage() {
               <Flower2 className="w-8 h-8 text-rose-400" />
               <span className="text-2xl font-bold font-playfair">Kwiaciarnia Beata Sztachańska</span>
             </div>
-            <p className="text-gray-400 mb-4">Pompowanie balonów helem</p>
-            <p className="text-gray-400 text-sm">© 2024 Kwiaciarnia Beata Sztachańska. Wszystkie prawa zastrzeżone.</p>
+            <p className="text-gray-400 mb-4"></p>
+            <p className="text-gray-400 text-sm">© 2025 Kwiaciarnia Beata Sztachańska. Wszystkie prawa zastrzeżone.</p>
           </div>
         </div>
       </footer>
