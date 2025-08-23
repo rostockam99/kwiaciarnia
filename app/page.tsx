@@ -736,7 +736,7 @@ export default function KwiaciarniaPage() {
 
       {/* Gallery Modal */}
       {isGalleryOpen && selectedOffer && (
-        <div className="fixed inset-0 bg-black/90 z-[60] flex flex-col">
+        <div className="fixed inset-0 bg-black/90 z-[60] flex flex-col overflow-hidden">
           <div
             className={`relative w-full h-full flex flex-col transition-all duration-300 ${isGalleryOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
           >
@@ -755,14 +755,14 @@ export default function KwiaciarniaPage() {
             </div>
 
             {/* Main Image Container */}
-            <div className="flex-1 flex items-center justify-center relative p-4">
-              <div className="relative max-w-full max-h-full flex items-center justify-center">
+            <div className="flex-1 flex items-center justify-center relative p-4 min-h-0">
+              <div className="relative w-full h-full flex items-center justify-center">
                 <Image
                   src={galleryImages[currentImageIndex]?.src || "/placeholder.svg"}
                   alt={galleryImages[currentImageIndex]?.alt || "Galeria"}
                   width={1200}
                   height={800}
-                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  className="max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-2xl"
                   priority
                 />
 
