@@ -66,12 +66,14 @@ export default function KwiaciarniaPage() {
   }, [isGalleryOpen])
 
   // Prevent horizontal scroll on mobile
-  useEffect(() => {
-    document.body.style.overflowX = "hidden"
-    return () => {
-      document.body.style.overflowX = "auto"
-    }
-  }, [])
+useEffect(() => {
+  document.body.style.overflowX = "hidden"
+  document.documentElement.style.overflowX = "hidden" // DODAJ TO
+  return () => {
+    document.body.style.overflowX = "auto"
+    document.documentElement.style.overflowX = "auto" // I TO
+  }
+}, [])
 
   const offers = [
     {
