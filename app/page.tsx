@@ -174,7 +174,7 @@ useEffect(() => {
     },
     {
       id: 2,
-      name: "Marcin Nowak",
+      name: "Marcin",
       rating: 5,
       text: "Fantastyczne dekoracje sali weselnej. Goście byli zachwyceni! Profesjonalna obsługa i piękne kompozycje kwiatowe. Dziękujemy!",
       date: "2024-01-10",
