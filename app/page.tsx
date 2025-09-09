@@ -190,9 +190,9 @@ useEffect(() => {
     },
     {
       id: 4,
-      name: "Tomasz Lewandowski",
+      name: "Łukasz Maj",
       rating: 5,
-      text: "Dekoracja kościoła na ślub była przepiękna. Pani Beata ma niesamowite wyczucie estetyki. Bardzo profesjonalne podejście.",
+      text: "Wnętrze kościoła wyglądało subtelnie i bardzo elegancko – dokładnie tak, jak chcieliśmy. Zero przesady, same piękne akcenty podkreślające uroczystość. Wielki plus za pomysłowość i terminowość.",
       date: "2023-12-28",
       service: "Dekoracja kościoła",
     },
@@ -200,7 +200,7 @@ useEffect(() => {
       id: 5,
       name: "Robert Kowalczyk",
       rating: 5,
-      text: "Oprawa komunijna dla mojego syna była przepiękna! Dekoracje kościoła i bukiety były wykonane z największą starannością. Pani Beata ma ogromne doświadczenie i wyczucie.",
+      text: "Oprawa komunijna dla mojego syna była przepiękna! Dekoracje kościoła i bukiety były wykonane z największą starannością.",
       date: "2023-12-10",
       service: "Oprawa komunijna",
     },
@@ -208,9 +208,9 @@ useEffect(() => {
       id: 6,
       name: "Robert Kowalczyk",
       rating: 5,
-      text: "Oprawa komunijna dla mojego syna była przepiękna! Dekoracje kościoła i bukiety były wykonane z największą starannością. Pani Beata ma ogromne doświadczenie i wyczucie.",
+      text: "Bukiet był dokładnie taki, jak chciałam – prosty, elegancki i dobrze się trzymał przez cały dzień. Wszystko ustalone szybko i bez problemów.",
       date: "2023-12-10",
-      service: "Oprawa komunijna",
+      service: "Bukiet ślubny",
     },
   ]
 
