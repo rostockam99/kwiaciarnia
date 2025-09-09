@@ -166,7 +166,7 @@ useEffect(() => {
   const reviews = [
     {
       id: 1,
-      name: "Anna Kowalska",
+      name: "Monika Moroz",
       rating: 5,
       text: "Przepiękny bukiet ślubny! Pani Beata doskonale zrozumiała moją wizję i stworzyła coś jeszcze piękniejszego niż sobie wyobrażałam. Polecam z całego serca!",
       date: "2024-01-15",
@@ -206,7 +206,7 @@ useEffect(() => {
     },
     {
       id: 6,
-      name: "Robert Kowalczyk",
+      name: "Magdalena Stępień",
       rating: 5,
       text: "Bukiet był dokładnie taki, jak chciałam – prosty, elegancki i dobrze się trzymał przez cały dzień. Wszystko ustalone szybko i bez problemów.",
       date: "2023-12-10",
