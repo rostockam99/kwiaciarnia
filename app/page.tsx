@@ -106,7 +106,7 @@ useEffect(() => {
       title: "Dekoracje sal",
       description: "Profesjonalne dekoracje sal weselnych i komunijnych żywymi kwiatami",
       color: "from-rose-200 to-pink-100",
-      imageCount: 55,
+      imageCount: 48,
     },
     {
       id: "auta-do-slubu",
@@ -135,8 +135,8 @@ useEffect(() => {
     {
       id: "florystyka-pogrzebowa",
       icon: <Flower2 className="w-8 h-8 text-rose-500" />,
-      title: "Florystyka pogrzebowa",
-      description: "Wieńce, wiązanki i kompozycje pogrzebowe",
+      title: "Żywe wieńce",
+      description: "Ręcznie tworzone wieńce z żywych kwiatów – na różne okazje: od uroczystości rodzinnych, przez święta, aż po wydarzenia okolicznościowe.",
       color: "from-slate-100 to-gray-200",
       imageCount: 48,
     },
