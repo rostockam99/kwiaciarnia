@@ -600,12 +600,6 @@ useEffect(() => {
                       <div className="p-3 bg-rose-100 rounded-full">
                         <Mail className="w-6 h-6 text-rose-500" />
                       </div>
-                      <div>
-                        <p className="font-medium text-gray-800 text-lg">Email</p>
-                        <a href="mailto:kontakt@kwiaciarnia-beata.pl" className="text-rose-600 hover:text-rose-700">
-                          kontakt@kwiaciarnia-beata.pl
-                        </a>
-                      </div>
                     </div>
                     <div className="flex items-center space-x-4">
                       <div className="p-3 bg-rose-100 rounded-full">
