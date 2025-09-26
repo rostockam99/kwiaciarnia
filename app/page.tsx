@@ -596,11 +596,7 @@ useEffect(() => {
                         </a>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="p-3 bg-rose-100 rounded-full">
-                        <Mail className="w-6 h-6 text-rose-500" />
-                      </div>
-                    </div>
+              
                     <div className="flex items-center space-x-4">
                       <div className="p-3 bg-rose-100 rounded-full">
                         <Clock className="w-6 h-6 text-rose-500" />
